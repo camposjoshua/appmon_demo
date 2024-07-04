@@ -30,8 +30,11 @@ export default function UserHUD() {
 
   return (
     <View style={{}}>
-      <Text>Pokemon Party</Text>
-      <View style={styles.partyContainer}>
+      <View style={ isEditing ?
+        styles.editPartyContainer
+        :
+        styles.partyContainer
+        }>
         <FlatList 
           data={party}
           numColumns={6}
@@ -41,7 +44,7 @@ export default function UserHUD() {
             return(
               <TouchableOpacity disabled={!isEditing} onPress={() => handleRemovePokemon(item.id as number)}>
                 <View style={styles.unitContainer}>
-                  <SpriteView url={item.sprite} size={50} />
+                  <SpriteView id={item.id as number} size={50} />
                 </View>
               </TouchableOpacity>
             )
@@ -70,6 +73,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#C1CEFE',
     borderRadius: 20,
     padding: 4
+  },
+  editPartyContainer:{
+    borderColor: Colors.main.secondary,
+    borderWidth: 2,
+    backgroundColor: '#C1CEFE',
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 2
   },
   unitContainer: {
     alignItems: "center", 
